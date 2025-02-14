@@ -3,7 +3,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    private Rigidbody rb;
+    private Rigidbody2D rb;
     public Animator animator;
     public Vector3 moveInput;
     private SpriteRenderer spriteRenderer;
@@ -12,19 +12,33 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        moveInput.x = Input.GetAxis("Horizontal");
-        moveInput.y = Input.GetAxis("Vertical");
+        moveInput.x = Input.GetAxisRaw("Horizontal");
+        moveInput.y = Input.GetAxisRaw("Vertical");
+
+        Vector3 movement = moveInput.normalized;
         transform.position += moveInput * moveSpeed * Time.deltaTime;
 
-        animator.SetFloat("Speed", moveInput.sqrMagnitude);
+        animator.SetFloat("Speed", movement.sqrMagnitude);
 
         if (moveInput.x != 0)
         {
             spriteRenderer.flipX = moveInput.x < 0;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        Vector2 movement = moveInput.normalized * moveSpeed;
+        rb.linearVelocity = movement;
+
+        if (moveInput.magnitude == 0)
+        {
+            rb.linearVelocity = Vector2.zero;
         }
     }
 }
