@@ -1,8 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Reposition : MonoBehaviour
 {
     Collider2D coll;
+    static bool lastMoveHorizontal = true;
 
     private void Awake()
     {
@@ -11,27 +12,43 @@ public class Reposition : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        //Ngoc change code
         if (!collision.CompareTag("Area")) return;
-
         Vector3 playerPos = GameManager.instance.player.transform.position;
         Vector3 myPos = transform.position;
-        float diffX = Mathf.Abs(playerPos.x - myPos.x);
-        float diffY = Mathf.Abs(playerPos.y - myPos.y);
+        float diffX = playerPos.x - myPos.x;
+        float diffY = playerPos.y - myPos.y;
+
+        float dirX = diffX < 0 ? -1 : 1;
+        float dirY = diffY < 0 ? -1 : 1;
 
         Vector3 playerDir = GameManager.instance.player.moveInput;
-        float dirX = playerDir.x < 0 ? -1 : 1;
-        float dirY = playerDir.y < 0 ? -1 : 1;
-
+        Debug.Log(playerDir);
         switch (transform.tag)
         {
             case "Ground":
-                if (diffX > diffY)
+                if (Mathf.Abs(diffX) > Mathf.Abs(diffY))
                 {
-                    transform.Translate(Vector3.right * dirX * 40);
+                    transform.Translate(Vector3.right * dirX * 54);
+                    lastMoveHorizontal = true; // Cập nhật hướng di chuyển gần nhất
+
                 }
-                else if (diffX < diffY)
+                else if (Mathf.Abs(diffX) < Mathf.Abs(diffY))
                 {
-                    transform.Translate(Vector3.up * dirY * 40);
+                    transform.Translate(Vector3.up * dirY * 54);
+                    lastMoveHorizontal = false; // Cập nhật hướng di chuyển gần nhất
+
+                }
+                else
+                {
+                    if (lastMoveHorizontal)
+                    {
+                        transform.Translate(Vector3.right * dirX * 54);
+                    }
+                    else
+                    {
+                        transform.Translate(Vector3.up * dirY * 54);
+                    }
                 }
                 break;
             case "Enemy":
