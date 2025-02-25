@@ -8,6 +8,18 @@ public class Player : MonoBehaviour
     public Vector3 moveInput;
     private SpriteRenderer spriteRenderer;
 
+    Rigidbody2D rigid;
+    SpriteRenderer sprite;
+    Animator anim;
+    public Scanner scanner;
+
+    void Awake()
+    {
+        scanner = GetComponent<Scanner>();
+        rigid = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+    }
     private void Start()
     {
         animator = GetComponent<Animator>();
