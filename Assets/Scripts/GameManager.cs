@@ -4,15 +4,22 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance;
+
+    [Header("# Game Control")]
+    public float GameTime;
+    public float MaxGameTime = 2 * 10f;  // 2*10f => 20s  || 5*60f => 6m
+
+    [Header("# Player Control")]
+    public int level;
+    public int kill;
+    public int exp;
+    public int[] nextExp = { 3,5,10,100,150,210,280,360,450,600 };
+
+    [Header("# Game Object")]
     public PoolManager pool;
     public Player player;
 
-    public int level;
-    public int kill;
-    public float exp;
 
-    public float GameTime;
-    public float MaxGameTime = 2 * 10f;  // 2*10f => 20s  || 5*60f => 6m
     private void Awake()
     {
         if (instance == null)
@@ -41,6 +48,16 @@ public class GameManager : MonoBehaviour
             player = FindObjectOfType<Player>();
             if (player == null)
                 Debug.LogError("Player not found!");
+        }
+    }
+    //ngoc add code
+    public void GetExp()
+    {
+        exp++;
+        if (exp >= nextExp[level])
+        {
+            level++;
+            exp = 0;
         }
     }
 }

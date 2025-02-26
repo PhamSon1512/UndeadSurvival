@@ -62,8 +62,8 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bullet"))
-        {
+        if (!collision.CompareTag("Bullet")||!isLive) return;
+        
             Bullet bullet = collision.GetComponent<Bullet>();
             health -= bullet.damage;
             StartCoroutine(Knokback());
@@ -76,15 +76,16 @@ public class Enemy : MonoBehaviour
                 rigid.simulated = false;
                 spriteRenderer.sortingOrder = 1;
                 animator.SetBool("Dead", true);
-                Dead();
+                StartCoroutine(Dead());
+                GameManager.instance.kill++;
+                GameManager.instance.GetExp();
             }
             else
             {
                 animator.SetTrigger("Hit");
                 //live
             }
-        }
-        else return;
+        
     }
 
     IEnumerator Knokback()
@@ -95,10 +96,10 @@ public class Enemy : MonoBehaviour
         rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
 
     }
-    void Dead()
+    IEnumerator Dead()
     {
-        //yield return new WaitForSeconds(2f);
-        //gameObject.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
     }
 }
 
