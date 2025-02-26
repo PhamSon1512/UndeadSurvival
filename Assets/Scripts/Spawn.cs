@@ -21,6 +21,11 @@ public class Spawn : MonoBehaviour
     {
         timer += Time.deltaTime;
         level = Mathf.FloorToInt(GameManager.instance.GameTime / 10f);
+        //ngoc add level restriction
+        if (level >= spawnData.Length)
+        {
+            level = spawnData.Length - 1;
+        }
         if (timer > spawnData[level].time)
         {
            // numberofenemy += 1;
