@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public float MaxGameTime = 2 * 10f;  // 2*10f => 20s  || 5*60f => 6m
 
     [Header("# Player Control")]
+    public int health;
+    public int maxHealth = 100;
     public int level;
     public int kill;
     public int exp;
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     private void Update()
     {
         GameTime += Time.deltaTime;
@@ -43,6 +46,7 @@ public class GameManager : MonoBehaviour
     [System.Obsolete]
     private void Start()
     {
+        health = maxHealth;
         if (player == null)
         {
             player = FindObjectOfType<Player>();

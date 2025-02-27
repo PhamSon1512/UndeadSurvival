@@ -25,16 +25,21 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 mySlider.value = curExp / maxExp;
                 break;
             case InfoType.Level:
-                myText.text = "Level: " + GameManager.instance.level;
+                myText.text = string.Format("Lv.{0:F0}", GameManager.instance.level);
                 break;
             case InfoType.Kill:
-                myText.text = "Kill: " + GameManager.instance.kill;
+                myText.text = string.Format("{0:F0}", GameManager.instance.kill);
                 break;
             case InfoType.Time:
-                myText.text = "Time: " + GameManager.instance.GameTime;
+                float remainTime = GameManager.instance.MaxGameTime - GameManager.instance.GameTime;
+                int min = (int)remainTime / 60;
+                int sec = (int)remainTime % 60;
+                myText.text = string.Format("{0:D2}:{1:D2}", min, sec);
                 break;
             case InfoType.Health:
-                //mySlider.value = GameManager.instance.player.health;
+                float curHealth = GameManager.instance.health;
+                float maxHealth = GameManager.instance.maxHealth;
+                mySlider.value = curHealth / maxHealth;
                 break;
         }
     }
