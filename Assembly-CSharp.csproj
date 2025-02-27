@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\PoolManager.cs" />
     <Compile Include="Assets\Scripts\Reposition.cs" />
+    <Compile Include="Assets\Scripts\Follow.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Spawn.cs" />
