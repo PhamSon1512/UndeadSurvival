@@ -1,3 +1,4 @@
+using System.Runtime.ExceptionServices;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
     SpriteRenderer sprite;
     Animator anim;
     public Scanner scanner;
+    public Hand[] hands;
 
     void Awake()
     {
@@ -19,6 +21,7 @@ public class Player : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        hands = GetComponentsInChildren<Hand>(true);
     }
     private void Start()
     {
@@ -29,6 +32,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.instance.isLive) return;
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
 
@@ -45,6 +49,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameManager.instance.isLive) return;
         Vector2 movement = moveInput.normalized * moveSpeed;
         rb.linearVelocity = movement;
 

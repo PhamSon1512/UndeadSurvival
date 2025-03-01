@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class Weapon : MonoBehaviour
 
     void Awake()
     {
-        player = GetComponentInParent<Player>();
+        player = GameManager.instance.player;
     }
     public void LevelUp(float damage, int count)
     {
@@ -23,10 +24,30 @@ public class Weapon : MonoBehaviour
         {
             Batch();
         }
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
-    public void Init()
+    public void Init(ItemData data)
     {
-        switch(id)
+        // Basic setup
+        name = "Weapon " + data.itemId;
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero;
+
+        // Property setup
+        id = data.itemId;
+        damage = data.baseDamage;
+        count = data.baseCount;
+
+        for (int i = 0;i < GameManager.instance.pool.prefab.Length; i++)
+        {
+            if(data.projectile  == GameManager.instance.pool.prefab[i])
+            {
+                prefabId = i;
+                break;
+            }
+        }
+
+        switch (id)
         {
             case 0:
                 speed = 150;
@@ -36,6 +57,13 @@ public class Weapon : MonoBehaviour
                 speed = 0.3f; // Tốc độ ra đạn
                 break;
         }
+
+        // Hand Set
+        Hand hand = player.hands[(int)data.itemType];
+        hand.spriteRenderer.sprite = data.hand;
+        hand.gameObject.SetActive(true);
+
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
     void Batch()
     {
@@ -59,12 +87,10 @@ public class Weapon : MonoBehaviour
             bullet.GetComponent<Bullet>().Init(damage, -1,Vector3.zero); // -1 is infinity per
         }
     }
-    void Start()
-    {
-        Init();
-    }
+
     void Update()
     {
+        if (!GameManager.instance.isLive) return;
         switch (id)
         {
             case 0:
