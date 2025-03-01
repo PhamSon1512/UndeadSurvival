@@ -19,6 +19,7 @@ public class Spawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.instance.isLive) return;
         timer += Time.deltaTime;
         level = Mathf.FloorToInt(GameManager.instance.GameTime / 10f);
         //ngoc add level restriction

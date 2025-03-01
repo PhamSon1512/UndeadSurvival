@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour
     [System.Obsolete]
     private void FixedUpdate()
     {
+        if (!GameManager.instance.isLive) return;
         if (!isLive || animator.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
         Vector2 dirVec = target.position - rigid.position;
         Vector2 nextVec = dirVec.normalized * speed * Time.deltaTime;
@@ -57,6 +58,7 @@ public class Enemy : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!GameManager.instance.isLive) return;
         if (!isLive) return;
         spriteRenderer.flipX = target.position.x < rigid.position.x;
     }
