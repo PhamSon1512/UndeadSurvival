@@ -31,9 +31,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 myText.text = string.Format("{0:F0}", GameManager.instance.kill);
                 break;
             case InfoType.Time:
-                float remainTime = GameManager.instance.MaxGameTime - GameManager.instance.GameTime;
-                int min = (int)remainTime / 60;
-                int sec = (int)remainTime % 60;
+                float aliveTime = GameManager.instance.GameTime;
+                int min = (int)aliveTime / 60;
+                int sec = (int)aliveTime % 60;
                 myText.text = string.Format("{0:D2}:{1:D2}", min, sec);
                 break;
             case InfoType.Health:
