@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 
     [Header("# Game Control")]
     public float GameTime;
-    public float MaxGameTime = 2 * 10f;  // 2*10f => 20s  || 5*60f => 6m
     public bool isLive;
 
     [Header("# Player Info")]
@@ -44,26 +43,27 @@ public class GameManager : MonoBehaviour
     {
         if (!isLive) return;
         GameTime += Time.deltaTime;
-        if (GameTime > MaxGameTime)
-        {
-            GameTime = MaxGameTime;
-        }
+        
     }
 
     public void GameStart()
     {
         health = maxHealth;
+
+        // Tìm lại player khi game restart
+        if (player == null)
+            player = FindObjectOfType<Player>();
+
         if (player == null)
         {
-            player = FindObjectOfType<Player>();
-            if (player == null)
-                Debug.LogError("Player not found!");
+            Debug.LogError("Player not found!");
+            return;
         }
 
-        //Son add code
         uiLevelUp.Select(0);
         Resume();
     }
+
     public void GameOver()
     {
         StartCoroutine(GameOverRoutine());
@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour
     }
     public void GameRetry()
     {
+        Time.timeScale = 1; // Reset thời gian nếu bị pause
+        Destroy(gameObject); // Xóa GameManager cũ để tránh lỗi
         SceneManager.LoadScene(0);
     }
     //ngoc add code

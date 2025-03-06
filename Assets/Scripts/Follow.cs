@@ -10,6 +10,8 @@ public class Follow : MonoBehaviour
 
     void FixedUpdate()
     {
+        //player=null Ngoc add code
+        if(GameManager.instance.player == null) return;
         rect.position = Camera.main.WorldToScreenPoint(GameManager.instance.player.transform.position);
     }
 }
