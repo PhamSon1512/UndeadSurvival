@@ -14,24 +14,31 @@ public class Bullet : MonoBehaviour
     {
         this.damage = damage;
         this.per = per;
-        if(per > -1)
+        if(per >= 0)
         {
             Rigid.linearVelocity = dir * 15f; // Tốc độ đạn
         }
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy") || per == -1 )
+        if (!collision.CompareTag("Enemy") || per == -100)
         {
             return;
         }
         per--;
-        if(per == -1)
+        if(per < 0)
         {
             Rigid.linearVelocity = Vector2.zero;
             gameObject.SetActive(false);
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Area") || per == -100) return;
+        gameObject.SetActive(false);
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Luminous_tree2_0: -5806030802586218708
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

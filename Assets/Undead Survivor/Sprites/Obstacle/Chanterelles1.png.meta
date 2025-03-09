@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Chanterelles1_0: 3151870788668933935
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

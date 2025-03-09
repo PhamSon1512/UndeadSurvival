@@ -1,45 +1,103 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-    public enum InfoType { Exp, Level, Kill, Time, Health}
+    public enum InfoType { Exp, Level, Kill, Time, Health, Gold }
     public InfoType type;
-    Text myText;
-    Slider mySlider;
+
+    private Text myText;
+    private Slider mySlider;
+    private RectTransform rectTransform;
+    private Vector3 originalPosition;
 
     void Awake()
     {
         myText = GetComponent<Text>();
         mySlider = GetComponent<Slider>();
+        rectTransform = GetComponent<RectTransform>();
+
+        // Lưu vị trí ban đầu để tránh bị trôi
+        if (rectTransform != null)
+        {
+            originalPosition = rectTransform.localPosition;
+        }
+    }
+
+    void Start()
+    {
+        // Đảm bảo đúng vị trí khi bắt đầu
+        if (rectTransform != null)
+        {
+            rectTransform.localPosition = originalPosition;
+        }
+    }
+
+    void Update()
+    {
+        // Đảm bảo thanh exp không bị trôi khi chạy game
+        if (rectTransform != null && type == InfoType.Exp)
+        {
+            // Reset vị trí về vị trí ban đầu nếu bị thay đổi
+            if (rectTransform.localPosition != originalPosition)
+            {
+                rectTransform.localPosition = originalPosition;
+            }
+        }
     }
 
     private void LateUpdate()
     {
+        if (GameManager.instance == null) return;
+
         switch (type)
         {
             case InfoType.Exp:
-                float curExp=GameManager.instance.exp;
+                float curExp = GameManager.instance.exp;
                 float maxExp = GameManager.instance.nextExp[Mathf.Min(GameManager.instance.level, GameManager.instance.nextExp.Length - 1)];
-                mySlider.value = curExp / maxExp;
+                if (mySlider != null)
+                {
+                    mySlider.value = curExp / maxExp;
+                }
                 break;
             case InfoType.Level:
-                myText.text = string.Format("Lv.{0:F0}", GameManager.instance.level);
+                if (myText != null)
+                {
+                    myText.text = string.Format("Lv.{0:F0}", GameManager.instance.level);
+                }
                 break;
             case InfoType.Kill:
-                myText.text = string.Format("{0:F0}", GameManager.instance.kill);
+                if (myText != null)
+                {
+                    myText.text = string.Format("{0:F0}", GameManager.instance.kill);
+                }
                 break;
             case InfoType.Time:
                 float aliveTime = GameManager.instance.GameTime;
                 int min = (int)aliveTime / 60;
                 int sec = (int)aliveTime % 60;
-                myText.text = string.Format("{0:D2}:{1:D2}", min, sec);
+                if (myText != null)
+                {
+                    myText.text = string.Format("{0:D2}:{1:D2}", min, sec);
+                }
                 break;
             case InfoType.Health:
                 float curHealth = GameManager.instance.health;
                 float maxHealth = GameManager.instance.maxHealth;
-                mySlider.value = curHealth / maxHealth;
+                if (mySlider != null)
+                {
+                    mySlider.value = curHealth / maxHealth;
+                }
+                break;
+            case InfoType.Gold:
+                if (myText != null)
+                {
+                    // Đảm bảo hiển thị chính xác giá trị gold
+                    myText.text = string.Format("{0:F0}", GameManager.instance.gold);
+                    // Debug ra console để kiểm tra
+                    Debug.Log("Updating Gold UI: " + GameManager.instance.gold);
+                }
                 break;
         }
     }

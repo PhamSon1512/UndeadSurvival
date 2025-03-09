@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Light_balls_tree2_0: -7597303778704255783
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

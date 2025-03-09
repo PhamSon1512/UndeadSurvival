@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tree_idol_wolf_0: 3400099442599694704
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

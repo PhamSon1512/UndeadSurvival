@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
+    public static int healItemUsageCount = 0;
     public ItemData data;
     public int level;
     public Weapon weapon;
@@ -85,6 +86,8 @@ public class Item : MonoBehaviour
                 break;
             case ItemData.ItemType.Heal:
                 GameManager.instance.health = GameManager.instance.maxHealth;
+                healItemUsageCount++;
+                level++;
                 break;
         }
         if(level == data.damages.Length)
