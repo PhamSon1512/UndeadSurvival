@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Beige_green_mushroom2_0: 265913693091172150
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
