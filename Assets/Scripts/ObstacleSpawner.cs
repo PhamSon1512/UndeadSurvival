@@ -52,7 +52,18 @@ public class ObstacleSpawner : MonoBehaviour
                     Random.value < spawnChance)
                 {
                     int obstacleIndex = Random.Range(0, obstacles.Count);
-                    GameObject newTree = Instantiate(obstacles[obstacleIndex], spawnPos, Quaternion.identity);
+                    GameObject newTree = Instantiate(obstacles[obstacleIndex],
+                        new Vector3(spawnPos.x, spawnPos.y, 0),
+                        Quaternion.identity);
+
+                    // NGĂN CÂY BỊ RƠI & ĐẨY
+                    Rigidbody2D rb = newTree.GetComponent<Rigidbody2D>();
+                    if (rb != null)
+                    {
+                        rb.isKinematic = true; // Không bị ảnh hưởng bởi Physics
+                        rb.linearVelocity = Vector2.zero; // Đảm bảo không bị di chuyển
+                    }
+
                     spawnedObstacles[spawnPos] = newTree;
                 }
             }
