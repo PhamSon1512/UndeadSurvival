@@ -23,7 +23,6 @@ public class Reposition : MonoBehaviour
         float dirY = diffY < 0 ? -1 : 1;
 
         Vector3 playerDir = GameManager.instance.player.moveInput;
-        Debug.Log(playerDir);
         switch (transform.tag)
         {
             case "Ground":
