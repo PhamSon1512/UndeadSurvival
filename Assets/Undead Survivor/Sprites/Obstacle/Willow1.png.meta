@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Willow1_0: -3039780933013427093
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

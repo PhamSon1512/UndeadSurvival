@@ -1,15 +1,18 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Spawn : MonoBehaviour
 {
     public Transform[] spawnPoint;
     public SpawnData[] spawnData;
     float timer;
+    public float levelTime;
 
     int level;
     private void Awake()
     {
         spawnPoint = GetComponentsInChildren<Transform>();
+        //levelTime = GameManager.instance.MaxGameTime / spawnData.Length;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Swirling tree1_0: 9046230543352450835
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

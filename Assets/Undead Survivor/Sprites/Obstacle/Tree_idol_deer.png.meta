@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tree_idol_deer_0: -682419832077479818
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager instance;
 
     [Header("# Game Control")]
@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
     public int level;
     public int kill;
     public int exp;
-    public int[] nextExp = { 3,5,10,100,150,210,280,360,450,600 };
+    public int gold;
+    public int[] nextExp = { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
 
     [Header("# Game Object")]
     public PoolManager pool;
@@ -25,6 +26,10 @@ public class GameManager : MonoBehaviour
     public LevelUp uiLevelUp;
     public GameObject uiResult;
     public GameObject enemyCleaner;
+
+    // Thêm tham chiếu đến UI
+    [Header("# UI References")]
+    public GameObject goldCountUI;
 
     private void Awake()
     {
@@ -39,16 +44,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // Đảm bảo các giá trị ban đầu
+        if (health <= 0) health = maxHealth;
+        if (gold < 0) gold = 0;
+    }
+
     private void Update()
     {
         if (!isLive) return;
         GameTime += Time.deltaTime;
-        
     }
 
     public void GameStart()
     {
         health = maxHealth;
+        level = 0;
+        exp = 0;
+        gold = 0;
+        kill = 0;
 
         // Tìm lại player khi game restart
         if (player == null)
@@ -60,8 +75,62 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        // Tìm và cập nhật UI nếu chưa có
+        FindAndUpdateUIReferences();
+
         uiLevelUp.Select(0);
         Resume();
+    }
+
+    private void FindAndUpdateUIReferences()
+    {
+        // Tìm tất cả các UI script và cập nhật nếu cần thiết
+        NewMonoBehaviourScript[] uiElements = FindObjectsOfType<NewMonoBehaviourScript>();
+        foreach (var ui in uiElements)
+        {
+            // Đảm bảo UI được cập nhật một lần
+            if (ui.type == NewMonoBehaviourScript.InfoType.Gold)
+            {
+                Text text = ui.GetComponent<Text>();
+                if (text != null)
+                {
+                    text.text = gold.ToString();
+                }
+            }
+        }
+    }
+
+    public void GoldCount()
+    {
+        if (!isLive) return;
+
+        // Tăng giá trị gold và đảm bảo nó không âm
+        gold++;
+
+        // Debug chi tiết
+        Debug.Log("GoldCount called - Current gold: " + gold);
+
+        // Tìm và cập nhật UI Gold trực tiếp
+        NewMonoBehaviourScript[] uiScripts = FindObjectsOfType<NewMonoBehaviourScript>();
+        foreach (var script in uiScripts)
+        {
+            if (script.type == NewMonoBehaviourScript.InfoType.Gold)
+            {
+                Text goldText = script.GetComponent<Text>();
+                if (goldText != null)
+                {
+                    goldText.text = gold.ToString();
+                    Debug.Log("Gold UI updated to: " + gold);
+                }
+            }
+        }
+    }
+
+    public void KillCount()
+    {
+        if (!isLive) return;
+        kill++;
+        Debug.Log("Enemy killed! Total kills: " + kill);
     }
 
     public void GameOver()
@@ -76,32 +145,34 @@ public class GameManager : MonoBehaviour
         uiResult.SetActive(true);
         Stop();
     }
+
     public void GameRetry()
     {
         Time.timeScale = 1; // Reset thời gian nếu bị pause
-        Destroy(gameObject); // Xóa GameManager cũ để tránh lỗi
         SceneManager.LoadScene(0);
     }
-    //ngoc add code
+
     public void GetExp()
     {
-        if(!isLive) return;
+        if (!isLive) return;
         exp++;
-        if (exp >= nextExp[Mathf.Min(level, nextExp.Length-1)])
+
+        // Kiểm tra lên cấp
+        if (exp >= nextExp[Mathf.Min(level, nextExp.Length - 1)])
         {
             level++;
             exp = 0;
-            // Son add code
             uiLevelUp.Show();
+            Debug.Log("Level up! Current level: " + level);
         }
     }
 
-    //Son add code
     public void Stop()
     {
         isLive = false;
         Time.timeScale = 0;
     }
+
     public void Resume()
     {
         isLive = true;

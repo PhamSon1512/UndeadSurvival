@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Living gazebo1_0: -7991496789382206208
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
