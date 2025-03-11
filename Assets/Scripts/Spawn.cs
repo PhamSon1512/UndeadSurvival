@@ -5,13 +5,24 @@ public class Spawn : MonoBehaviour
 {
     public Transform[] spawnPoint;
     public SpawnData[] spawnData;
+    public static Spawn Instance;
     float timer;
+    float timerBoss;
     public float levelTime;
-
+    int numberofenemy;
+    int maxenemy;
     int level;
+    bool isBoss;
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
         spawnPoint = GetComponentsInChildren<Transform>();
+        numberofenemy = 0;
+        maxenemy = 20;
+        isBoss = false;
         //levelTime = GameManager.instance.MaxGameTime / spawnData.Length;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,6 +34,8 @@ public class Spawn : MonoBehaviour
     void Update()
     {
         if (!GameManager.instance.isLive) return;
+        if(!isBoss)
+            timerBoss += Time.deltaTime;
         timer += Time.deltaTime;
         level = Mathf.FloorToInt(GameManager.instance.GameTime / 10f);
         //ngoc add level restriction
@@ -30,18 +43,51 @@ public class Spawn : MonoBehaviour
         {
             level = spawnData.Length - 1;
         }
+        Debug.Log(timerBoss+"    "+ isBoss);
+        if(timerBoss >= (1 * 10))
+        {
+            SpawnsBoss();
+            isBoss = true;
+            timerBoss = 0;
+        }
         if (timer > spawnData[level].time)
         {
-           // numberofenemy += 1;
+            //numberofenemy += 1;
+            
             timer = 0;
-            Spawns();
+            if (numberofenemy < maxenemy)
+            {
+                numberofenemy += 1;
+                Spawns();
+            }
         }
     }
     void Spawns()
     {
         GameObject enemy = GameManager.instance.pool.Get(0);
         enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
-        enemy.GetComponent<Enemy>().Init(spawnData[level]);
+        enemy.GetComponent<Enemy>().Init(spawnData[Random.Range(0, spawnData.Length - 1)]);
+    }
+    void SpawnsBoss()
+    {
+        GameObject enemy = GameManager.instance.pool.Get(0);
+        enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
+        enemy.GetComponent<Enemy>().Init(spawnData[spawnData.Length - 1]);
+        enemy.transform.localScale = new Vector3(2, 2, 2);
+    }
+    public void reducenumberofenemy()
+    {
+        numberofenemy = numberofenemy - 1;
+        //Debug.Log(numberofenemy);
+    }
+    public void Increasenumberofenemy()
+    {
+        maxenemy = maxenemy + 10;
+       
+    }
+    public void BossDead()
+    {
+        isBoss = false;
 
     }
     [System.Serializable]

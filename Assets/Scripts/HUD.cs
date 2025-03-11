@@ -59,6 +59,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 if (mySlider != null)
                 {
                     mySlider.value = curExp / maxExp;
+                    Spawn.Instance.Increasenumberofenemy();
                 }
                 break;
             case InfoType.Level:
@@ -96,7 +97,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
                     // Đảm bảo hiển thị chính xác giá trị gold
                     myText.text = string.Format("{0:F0}", GameManager.instance.gold);
                     // Debug ra console để kiểm tra
-                    Debug.Log("Updating Gold UI: " + GameManager.instance.gold);
+                    //Debug.Log("Updating Gold UI: " + GameManager.instance.gold);
                 }
                 break;
         }

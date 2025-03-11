@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     public float maxHealth;
     public RuntimeAnimatorController[] animatorControllers;
     public Rigidbody2D target;
-
+    bool isBoss;
     [Header("Drop Settings")]
     public GameObject[] possibleDrops; // Array of possible item prefabs (Exp 2 and Mag)
     [Range(0f, 1f)]
@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        isBoss = false;
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -49,6 +50,10 @@ public class Enemy : MonoBehaviour
         speed = data.speed;
         maxHealth = data.health;
         health = data.health;
+        if(maxHealth >= 500)
+        {
+            isBoss = true;
+        }
     }
 
     private void FixedUpdate()
@@ -86,10 +91,13 @@ public class Enemy : MonoBehaviour
             rigid.simulated = false;
             spriteRenderer.sortingOrder = 1;
             animator.SetBool("Dead", true);
-
+            if(isBoss == true)
+            {
+                Spawn.Instance.BossDead();
+            }
             // Drop items directly instead of treasure chest
             DropItem();
-
+            Spawn.Instance.reducenumberofenemy();
             StartCoroutine(Dead());
             GameManager.instance.kill++;
             GameManager.instance.GetExp();
@@ -146,7 +154,9 @@ public class Enemy : MonoBehaviour
 
     IEnumerator Dead()
     {
+        
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
+        
     }
 }

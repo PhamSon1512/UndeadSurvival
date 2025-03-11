@@ -91,7 +91,7 @@ public class ExpAttractor : MonoBehaviour
 
         if (GameManager.instance == null)
         {
-            Debug.LogError("GameManager.instance is null!");
+            //Debug.LogError("GameManager.instance is null!");
             return;
         }
 
@@ -100,7 +100,7 @@ public class ExpAttractor : MonoBehaviour
         {
             case "Exp":
                 GameManager.instance.GetExp();
-                Debug.Log("Collected Exp through trigger");
+                //Debug.Log("Collected Exp through trigger");
                 break;
 
             case "Gold":
@@ -108,11 +108,11 @@ public class ExpAttractor : MonoBehaviour
                 if (GameManager.instance != null)
                 {
                     GameManager.instance.GoldCount();
-                    Debug.Log("Collected Gold through trigger. Gold count: " + GameManager.instance.gold);
+                    //Debug.Log("Collected Gold through trigger. Gold count: " + GameManager.instance.gold);
                 }
                 else
                 {
-                    Debug.LogError("GameManager is null when collecting gold");
+                    //Debug.LogError("GameManager is null when collecting gold");
                 }
                 break;
 
@@ -123,11 +123,11 @@ public class ExpAttractor : MonoBehaviour
                 {
                     player.ActivateMagnet();
                 }
-                Debug.Log("Collected Magnet through trigger");
+                //Debug.Log("Collected Magnet through trigger");
                 break;
 
             default:
-                Debug.Log("Collected unknown item: " + gameObject.name);
+                //Debug.Log("Collected unknown item: " + gameObject.name);
                 break;
         }
 

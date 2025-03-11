@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     public Player player;
     public LevelUp uiLevelUp;
     public GameObject uiResult;
-    public GameObject enemyCleaner;
 
     // Thêm tham chiếu đến UI
     [Header("# UI References")]
@@ -60,10 +59,6 @@ public class GameManager : MonoBehaviour
     public void GameStart()
     {
         health = maxHealth;
-        level = 0;
-        exp = 0;
-        gold = 0;
-        kill = 0;
 
         // Tìm lại player khi game restart
         if (player == null)
@@ -74,9 +69,6 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Player not found!");
             return;
         }
-
-        // Tìm và cập nhật UI nếu chưa có
-        FindAndUpdateUIReferences();
 
         uiLevelUp.Select(0);
         Resume();
@@ -149,7 +141,8 @@ public class GameManager : MonoBehaviour
     public void GameRetry()
     {
         Time.timeScale = 1; // Reset thời gian nếu bị pause
-        SceneManager.LoadScene(0);
+        Destroy(gameObject); // Xóa GameManager cũ để tránh lỗi
+        SceneManager.LoadScene(0); // Load lại scene
     }
 
     public void GetExp()
