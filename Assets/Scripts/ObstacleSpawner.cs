@@ -1,69 +1,91 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    public GameObject[] obstaclePrefabs; // Danh sách obstacle có thể spawn
-    public GameObject player; // Người chơi
-    public float spawnDistance = 15f; // Khoảng cách tối đa để spawn
-    public float spawnInterval = 10f; // Khoảng cách giữa các obstacle
-    public float despawnDistance = 100f; // Khoảng cách để xóa obstacle
-    public float spawnRangeX = 10f; // Phạm vi spawn theo trục X
-    public float emptyChance = 40f; // Xác suất để khoảng trống (40%)
+    public List<GameObject> obstacles; // Danh sách prefab cây
+    public Transform player; // Người chơi
+    public float spawnRadius = 12f; // Bán kính spawn cây
+    public float despawnDistance = 20f; // Khoảng cách tối đa trước khi xóa
+    public float gridSize = 3f; // Khoảng cách giữa các cây
+    public float spawnChance = 0.3f; // Xác suất spawn tại một điểm
+    public int maxObstacles = 50; // Số cây tối đa trên bản đồ
+    public float checkInterval = 1f; // Thời gian giữa mỗi lần kiểm tra (giảm tần suất tính toán)
 
-    private float nextSpawnY; // Vị trí Y để spawn tiếp theo
-    private List<GameObject> spawnedObstacles = new List<GameObject>();
+    private Dictionary<Vector2, GameObject> spawnedObstacles = new Dictionary<Vector2, GameObject>();
 
     void Start()
     {
-        nextSpawnY = player.transform.position.y + 10f;
+        StartCoroutine(ManageObstacles()); // Chạy kiểm tra mỗi giây
+    }
 
-        // Spawn trước một số obstacle để game có chướng ngại vật ban đầu
-        for (int i = 0; i < 3; i++)
+    IEnumerator ManageObstacles()
+    {
+        while (true)
         {
-            SpawnObstacle();
+            SpawnObstacles();
+            DespawnObstacles();
+            yield return new WaitForSeconds(checkInterval);
         }
     }
 
-    void Update()
+    void SpawnObstacles()
     {
-        if (player.transform.position.y + spawnDistance > nextSpawnY)
+        if (player == null || obstacles.Count == 0 || spawnedObstacles.Count >= maxObstacles) return;
+
+        for (float x = -spawnRadius; x <= spawnRadius; x += gridSize)
         {
-            SpawnObstacle();
-        }
-
-        RemoveFarObstacles();
-    }
-
-    void SpawnObstacle()
-    {
-        // Xác suất tạo khoảng trống để người chơi có đường đi
-        if (Random.value < emptyChance)
-        {
-            Debug.Log("Empty space at Y = " + nextSpawnY);
-            nextSpawnY += spawnInterval;
-            return;
-        }
-
-        int randomIndex = Random.Range(0, obstaclePrefabs.Length);
-        Vector3 spawnPosition = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), nextSpawnY, 0);
-        GameObject newObstacle = Instantiate(obstaclePrefabs[randomIndex], spawnPosition, Quaternion.identity);
-
-        spawnedObstacles.Add(newObstacle);
-        nextSpawnY += spawnInterval;
-
-        Debug.Log("Spawned obstacle at Y = " + nextSpawnY);
-    }
-
-    void RemoveFarObstacles()
-    {
-        for (int i = spawnedObstacles.Count - 1; i >= 0; i--)
-        {
-            if (spawnedObstacles[i].transform.position.y < player.transform.position.y - despawnDistance)
+            for (float y = -spawnRadius; y <= spawnRadius; y += gridSize)
             {
-                Destroy(spawnedObstacles[i]);
-                spawnedObstacles.RemoveAt(i);
+                if (spawnedObstacles.Count >= maxObstacles) return; // Dừng ngay nếu đủ số cây tối đa
+
+                Vector2 spawnPos = new Vector2(
+                    Mathf.Round(player.position.x + x),
+                    Mathf.Round(player.position.y + y)
+                );
+
+                float distance = Vector2.Distance(player.position, spawnPos);
+
+                if (!spawnedObstacles.ContainsKey(spawnPos) &&
+                    distance > spawnRadius * 0.6f &&
+                    Random.value < spawnChance)
+                {
+                    int obstacleIndex = Random.Range(0, obstacles.Count);
+                    GameObject newTree = Instantiate(obstacles[obstacleIndex],
+                        new Vector3(spawnPos.x, spawnPos.y, 0),
+                        Quaternion.identity);
+
+                    // NGĂN CÂY BỊ RƠI & ĐẨY
+                    Rigidbody2D rb = newTree.GetComponent<Rigidbody2D>();
+                    if (rb != null)
+                    {
+                        rb.isKinematic = true; // Không bị ảnh hưởng bởi Physics
+                        rb.linearVelocity = Vector2.zero; // Đảm bảo không bị di chuyển
+                    }
+
+                    spawnedObstacles[spawnPos] = newTree;
+                }
             }
+        }
+    }
+
+    void DespawnObstacles()
+    {
+        List<Vector2> toRemove = new List<Vector2>();
+
+        foreach (var kvp in spawnedObstacles)
+        {
+            if (Vector2.Distance(player.position, kvp.Key) > despawnDistance)
+            {
+                Destroy(kvp.Value);
+                toRemove.Add(kvp.Key);
+            }
+        }
+
+        foreach (var key in toRemove)
+        {
+            spawnedObstacles.Remove(key);
         }
     }
 }
