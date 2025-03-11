@@ -24,8 +24,7 @@ public class GameManager : MonoBehaviour
     public PoolManager pool;
     public Player player;
     public LevelUp uiLevelUp;
-    public GameObject uiResult;
-
+    public GameResultUI gameResultUI;
     // Thêm tham chiếu đến UI
     [Header("# UI References")]
     public GameObject goldCountUI;
@@ -134,7 +133,10 @@ public class GameManager : MonoBehaviour
     {
         isLive = false;
         yield return new WaitForSeconds(0.5f);
-        uiResult.SetActive(true);
+        if (gameResultUI != null)
+        {
+            gameResultUI.ShowGameOverPanel();
+        }
         Stop();
     }
 
