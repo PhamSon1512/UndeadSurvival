@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "D:\\University\\PRU212\\Project PRU 2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{12AA5357-56CE-BC23-04C4-C71358563A6D}|Assembly-CSharp.csproj|D:\\University\\PRU212\\Project PRU 2\\assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{12AA5357-56CE-BC23-04C4-C71358563A6D}|Assembly-CSharp.csproj|d:\\university\\pru212\\project pru 2\\assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{12AA5357-56CE-BC23-04C4-C71358563A6D}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -15,7 +15,7 @@
       "RelativeMoniker": "D:0:0:{12AA5357-56CE-BC23-04C4-C71358563A6D}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{12AA5357-56CE-BC23-04C4-C71358563A6D}|Assembly-CSharp.csproj|d:\\university\\pru212\\project pru 2\\assets\\scripts\\expattractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{12AA5357-56CE-BC23-04C4-C71358563A6D}|Assembly-CSharp.csproj|D:\\University\\PRU212\\Project PRU 2\\assets\\scripts\\expattractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{12AA5357-56CE-BC23-04C4-C71358563A6D}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\expattractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -212,7 +212,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager.cs",
               "ToolTip": "D:\\University\\PRU212\\Project PRU 2\\Assets\\Scripts\\GameManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\GameManager.cs",
-              "ViewState": "AQIAAI0AAAAAAAAAAAAswJ8AAAAbAAAA",
+              "ViewState": "AQIAAHAAAAAAAAAAAAAYwJ8AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-13T19:51:43.475Z",
               "EditorCaption": ""
@@ -227,8 +227,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Enemy.cs",
               "ViewState": "AQIAAG4AAAAAAAAAAADwv5cAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-13T21:48:10.355Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-13T21:48:10.355Z"
             },
             {
               "$type": "Document",
@@ -276,8 +275,7 @@
               "RelativeToolTip": "Assets\\Scripts\\HUD.cs",
               "ViewState": "AQIAAD0AAAAAAAAAAAAUwFIAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-01T22:02:51.364Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-01T22:02:51.364Z"
             },
             {
               "$type": "Document",
@@ -289,8 +287,7 @@
               "RelativeToolTip": "Assets\\Scripts\\ExpAttractor.cs",
               "ViewState": "AQIAAFgAAAAAAAAAAAAUwHkAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-07T06:02:57.238Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-07T06:02:57.238Z"
             },
             {
               "$type": "Document",
@@ -314,8 +311,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Player.cs",
               "ViewState": "AQIAAB4AAAAAAAAAAAAwwGgAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T13:25:09.019Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-10T13:25:09.019Z"
             },
             {
               "$type": "Document",
