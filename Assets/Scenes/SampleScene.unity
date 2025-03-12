@@ -8578,10 +8578,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1344552919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 62.5, y: -31.25}
+  m_SizeDelta: {x: 125, y: 12.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &339524115
 MonoBehaviour:
@@ -16530,7 +16530,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 3.0851064
+  orthographic size: 4.2765956
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -17108,10 +17108,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1344552919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 62.5, y: -6.25}
+  m_SizeDelta: {x: 125, y: 12.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &637643927
 MonoBehaviour:
@@ -18032,7 +18032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &892072460
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27009,7 +27009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameTime: 0
-  isLive: 1
+  isLive: 0
   health: 0
   maxHealth: 100
   level: 0
@@ -28306,10 +28306,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1344552919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 62.5, y: -18.75}
+  m_SizeDelta: {x: 125, y: 12.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1590694634
 MonoBehaviour:
@@ -28653,7 +28653,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1675057027
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37244,10 +37244,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1344552919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 62.5, y: -43.75}
+  m_SizeDelta: {x: 125, y: 12.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2100391001
 MonoBehaviour:
