@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour
         speed = data.speed;
         maxHealth = data.health;
         health = data.health;
-        if(maxHealth >= 500)
+        if(maxHealth >= 100)
         {
             isBoss = true;
         }

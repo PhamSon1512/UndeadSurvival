@@ -6,6 +6,7 @@ public class Spawn : MonoBehaviour
     public Transform[] spawnPoint;
     public SpawnData[] spawnData;
     public static Spawn Instance;
+    public float timerspawnBoss = 30f;
     float timer;
     float timerBoss;
     public float levelTime;
@@ -43,8 +44,8 @@ public class Spawn : MonoBehaviour
         {
             level = spawnData.Length - 1;
         }
-        Debug.Log(timerBoss+"    "+ isBoss);
-        if(timerBoss >= (1 * 10))
+        //Debug.Log(timerBoss+"    "+ isBoss);
+        if(timerBoss >= timerspawnBoss)
         {
             SpawnsBoss();
             isBoss = true;
@@ -70,10 +71,10 @@ public class Spawn : MonoBehaviour
     }
     void SpawnsBoss()
     {
-        GameObject enemy = GameManager.instance.pool.Get(0);
-        enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
-        enemy.GetComponent<Enemy>().Init(spawnData[spawnData.Length - 1]);
-        enemy.transform.localScale = new Vector3(2, 2, 2);
+        GameObject enemyx = GameManager.instance.pool.Get(0);
+        enemyx.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
+        enemyx.GetComponent<Enemy>().Init(spawnData[spawnData.Length - 1]);
+        enemyx.transform.localScale = new Vector3(2, 2, 2);
     }
     public void reducenumberofenemy()
     {
@@ -87,8 +88,8 @@ public class Spawn : MonoBehaviour
     }
     public void BossDead()
     {
+        Debug.Log("Boss Dead");
         isBoss = false;
-
     }
     [System.Serializable]
     public class SpawnData

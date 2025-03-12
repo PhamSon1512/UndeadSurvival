@@ -16400,7 +16400,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 3.1382978
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -16765,7 +16765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab:
-  - {fileID: 2187529884920148398, guid: 78793bc6dcc325144b058eecf89dde77, type: 3}
+  - {fileID: 1841650553438789217, guid: 04034f4f65cb92c4f8aaf86b4d61e263, type: 3}
   - {fileID: 666695941131987073, guid: c681569434203a64096686351756593d, type: 3}
   - {fileID: 6020476838450644129, guid: ac33376c585bcaa469f4e3d98f7993a2, type: 3}
 --- !u!4 &583848903
@@ -17397,6 +17397,10 @@ MonoBehaviour:
     time: 0.2
     health: 12
     speed: 2.4
+  - spriteType: 2
+    time: 0.2
+    health: 1200
+    speed: 3
   levelTime: 0
 --- !u!1 &777290230
 GameObject:
@@ -27892,7 +27896,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 351051723}
   - {fileID: 276942305}
