@@ -18,17 +18,17 @@ public class GameManager : MonoBehaviour
     public int kill;
     public int exp;
     public int gold;
-    public int[] nextExp = { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
+    public int[] nextExp = { 3, 5, 10, 50, 70, 100, 150, 210, 280, 360, 450, 600 };
 
     [Header("# Game Object")]
     public PoolManager pool;
     public Player player;
     public LevelUp uiLevelUp;
-    public GameObject uiResult;
-
+    public GameResultUI gameResultUI;
     // Thêm tham chiếu đến UI
     [Header("# UI References")]
     public GameObject goldCountUI;
+    public Text persistentGoldText;
 
     private void Awake()
     {
@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            LoadPersistentGold();
         }
         else
         {
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
         // Đảm bảo các giá trị ban đầu
         if (health <= 0) health = maxHealth;
         if (gold < 0) gold = 0;
+        UpdatePersistentGoldDisplay();
     }
 
     private void Update()
@@ -56,11 +58,33 @@ public class GameManager : MonoBehaviour
         GameTime += Time.deltaTime;
     }
 
+    // display gold currenly
+    private void LoadPersistentGold()
+    {
+        gold = PlayerPrefs.GetInt("PersistentGold", 0);
+        Debug.Log("Loaded persistent gold: " + gold);
+    }
+
+    // save gold
+    private void SavePersistentGold()
+    {
+        PlayerPrefs.SetInt("PersistentGold", gold);
+        PlayerPrefs.Save();
+        Debug.Log("Saved persistent gold: " + gold);
+    }
+
+    // display gold after collection
+    private void UpdatePersistentGoldDisplay()
+    {
+        if (persistentGoldText != null)
+        {
+            persistentGoldText.text = "Gold: " + gold.ToString();
+        }
+    }
+
     public void GameStart()
     {
         health = maxHealth;
-
-        // Tìm lại player khi game restart
         if (player == null)
             player = FindObjectOfType<Player>();
 
@@ -74,35 +98,14 @@ public class GameManager : MonoBehaviour
         Resume();
     }
 
-    private void FindAndUpdateUIReferences()
-    {
-        // Tìm tất cả các UI script và cập nhật nếu cần thiết
-        NewMonoBehaviourScript[] uiElements = FindObjectsOfType<NewMonoBehaviourScript>();
-        foreach (var ui in uiElements)
-        {
-            // Đảm bảo UI được cập nhật một lần
-            if (ui.type == NewMonoBehaviourScript.InfoType.Gold)
-            {
-                Text text = ui.GetComponent<Text>();
-                if (text != null)
-                {
-                    text.text = gold.ToString();
-                }
-            }
-        }
-    }
-
     public void GoldCount()
     {
         if (!isLive) return;
-
-        // Tăng giá trị gold và đảm bảo nó không âm
         gold++;
+        SavePersistentGold();
 
-        // Debug chi tiết
         Debug.Log("GoldCount called - Current gold: " + gold);
 
-        // Tìm và cập nhật UI Gold trực tiếp
         NewMonoBehaviourScript[] uiScripts = FindObjectsOfType<NewMonoBehaviourScript>();
         foreach (var script in uiScripts)
         {
@@ -134,16 +137,20 @@ public class GameManager : MonoBehaviour
     {
         isLive = false;
         yield return new WaitForSeconds(0.5f);
-        uiResult.SetActive(true);
+        if (gameResultUI != null)
+        {
+            gameResultUI.ShowGameOverPanel();
+        }
         Stop();
     }
 
     public void GameRetry()
     {
         Time.timeScale = 1; // Reset thời gian nếu bị pause
+        SavePersistentGold();
         Destroy(gameObject); // Xóa GameManager cũ để tránh lỗi
         SceneManager.LoadScene(0); // Load lại scene
-    }
+    } 
 
     public void GetExp()
     {
