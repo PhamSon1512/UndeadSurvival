@@ -11,7 +11,7 @@ public class GameResultUI : MonoBehaviour
     public Text killsText;
     public Text timeText;
     public Text goldText;
-    public Text highestGoldText;
+    public Text highestKillText;
     public Button goldRevivalButton;
     public Button adRevivalButton;
     public Text goldRevivalText;
@@ -78,13 +78,13 @@ public class GameResultUI : MonoBehaviour
         timeText.text = string.Format("Total Time: {0:D2}:{1:D2}", (int)totalTime / 60, (int)totalTime % 60);
         goldText.text = "Gold Earned: " + goldEarned;
 
-        int highestGold = PlayerPrefs.GetInt("HighestGold", 0);
-        if (goldEarned > highestGold)
+        int highestKill = PlayerPrefs.GetInt("HighestKill", 0);
+        if (totalKills > highestKill)
         {
-            highestGold = goldEarned;
-            PlayerPrefs.SetInt("HighestGold", highestGold);
+            highestKill = totalKills;
+            PlayerPrefs.SetInt("HighestKill", highestKill);
         }
-        highestGoldText.text = "Highest Gold Record: " + highestGold;
+        highestKillText.text = "Highest Kill Record: " + highestKill;
 
         if (!hasRevivedThisSession)
         {

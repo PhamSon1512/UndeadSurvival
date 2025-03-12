@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class FireZoneSpawner : MonoBehaviour
 {
-    public GameObject fireZonePrefab; // Prefab của FireZone
-    public Transform player; // Người chơi
-    public float spawnRadius = 10f; // Bán kính spawn tối đa
-    public float minSpawnDistance = 3f; // Khoảng cách tối thiểu từ người chơi
-    public float fireZoneLifetime = 8f; // Thời gian tồn tại của mỗi FireZone
-    public float spawnInterval = 5f; // Thời gian giữa mỗi lần spawn
-    public int maxFireZones = 3; // Số lượng FireZone tối đa cùng lúc
+    public GameObject fireZonePrefab; 
+    public Transform player; 
+    public float spawnRadius = 10f; 
+    public float minSpawnDistance = 3f; 
+    public float fireZoneLifetime = 8f; 
+    public float spawnInterval = 3f;
+    public int maxFireZones = 3; 
 
     private List<GameObject> activeFireZones = new List<GameObject>();
 
@@ -35,6 +35,10 @@ public class FireZoneSpawner : MonoBehaviour
     void SpawnFireZone()
     {
         if (player == null || fireZonePrefab == null) return;
+        
+        maxFireZones = 3 + GameManager.instance.level*3;
+
+        if (activeFireZones.Count >= maxFireZones) return;
 
         Vector2 spawnPos;
         int attempts = 0;

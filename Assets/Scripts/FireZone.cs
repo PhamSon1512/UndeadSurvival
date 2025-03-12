@@ -2,7 +2,7 @@
 
 public class FireZone : MonoBehaviour
 {
-    public float damagePerSecond = 10f; // Lượng sát thương mỗi giây
+    public float damagePerSecond = 50000f; // Lượng sát thương mỗi giây
     private bool isPlayerInside = false;
     private Player player;
 
@@ -27,7 +27,13 @@ public class FireZone : MonoBehaviour
     {
         if (isPlayerInside && player != null && GameManager.instance.isLive)
         {
-            GameManager.instance.health -= damagePerSecond * Time.deltaTime;
+            // Tăng sát thương theo cấp độ của người chơi
+            float levelMultiplier = 1 + (GameManager.instance.level * 0.5f);
+            float actualDamage = damagePerSecond * levelMultiplier * Time.deltaTime;
+
+            GameManager.instance.health -= actualDamage;
+            Debug.Log("Player health: " + GameManager.instance.health + " (Damage: " + actualDamage + ")");
         }
     }
+
 }
