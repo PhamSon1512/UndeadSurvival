@@ -54,7 +54,7 @@ public class LevelUp : MonoBehaviour
                 }
             }
 
-            // Reroll if needed or if we have duplicates
+            // Reroll
             if (rerollNeeded)
                 continue;
 
@@ -65,15 +65,11 @@ public class LevelUp : MonoBehaviour
         for (int i = 0; i < rand.Length; i++)
         {
             Item randItem = items[rand[i]];
-
-            // Skip heal item if it's already been used 5 times
             if (rand[i] == 4 && Item.healItemUsageCount >= 5)
                 continue;
-
             // 3, Thay thế vật phẩm cấp max = vật phẩm khác
             if (randItem.level == randItem.data.damages.Length)
             {
-                // Don't activate item 4 if it's already been used 5 times
                 if (items[4].data.itemType != ItemData.ItemType.Heal || Item.healItemUsageCount < 5)
                 {
                     items[4].gameObject.SetActive(true);

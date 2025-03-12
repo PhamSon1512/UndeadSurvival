@@ -17,8 +17,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
         myText = GetComponent<Text>();
         mySlider = GetComponent<Slider>();
         rectTransform = GetComponent<RectTransform>();
-
-        // Lưu vị trí ban đầu để tránh bị trôi
         if (rectTransform != null)
         {
             originalPosition = rectTransform.localPosition;
@@ -27,7 +25,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     void Start()
     {
-        // Đảm bảo đúng vị trí khi bắt đầu
         if (rectTransform != null)
         {
             rectTransform.localPosition = originalPosition;
@@ -36,10 +33,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     void Update()
     {
-        // Đảm bảo thanh exp không bị trôi khi chạy game
         if (rectTransform != null && type == InfoType.Exp)
         {
-            // Reset vị trí về vị trí ban đầu nếu bị thay đổi
             if (rectTransform.localPosition != originalPosition)
             {
                 rectTransform.localPosition = originalPosition;
@@ -93,9 +88,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             case InfoType.Gold:
                 if (myText != null)
                 {
-                    // Đảm bảo hiển thị chính xác giá trị gold
                     myText.text = string.Format("{0:F0}", GameManager.instance.gold);
-                    // Debug ra console để kiểm tra
                     Debug.Log("Updating Gold UI: " + GameManager.instance.gold);
                 }
                 break;
