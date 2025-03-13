@@ -29,6 +29,8 @@ public class LevelUp : MonoBehaviour
 
     void Next()
     {
+        Spawn.Instance.Increasenumberofenemy();
+
         // 1, Vô hiệu hóa tất cả
         foreach (Item item in items)
         {

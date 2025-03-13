@@ -189,6 +189,7 @@ public class GameResultUI : MonoBehaviour
         }
         if (goldRevivalButton != null) goldRevivalButton.gameObject.SetActive(false);
         if (adRevivalButton != null) adRevivalButton.gameObject.SetActive(false);
+        retryButton.gameObject.SetActive(false);
         GameManager.instance.Resume();
     }
 

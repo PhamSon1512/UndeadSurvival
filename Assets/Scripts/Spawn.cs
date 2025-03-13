@@ -22,7 +22,7 @@ public class Spawn : MonoBehaviour
         }
         spawnPoint = GetComponentsInChildren<Transform>();
         numberofenemy = 0;
-        maxenemy = 20;
+        maxenemy = 10;
         isBoss = false;
         //levelTime = GameManager.instance.MaxGameTime / spawnData.Length;
     }
@@ -48,13 +48,14 @@ public class Spawn : MonoBehaviour
         if(timerBoss >= timerspawnBoss)
         {
             SpawnsBoss();
+            numberofenemy += 1;
             isBoss = true;
             timerBoss = 0;
         }
         if (timer > spawnData[level].time)
         {
             //numberofenemy += 1;
-            
+            Debug.Log(maxenemy);
             timer = 0;
             if (numberofenemy < maxenemy)
             {
@@ -83,7 +84,7 @@ public class Spawn : MonoBehaviour
     }
     public void Increasenumberofenemy()
     {
-        maxenemy = maxenemy + 10;
+        maxenemy = maxenemy + 5;
        
     }
     public void BossDead()
