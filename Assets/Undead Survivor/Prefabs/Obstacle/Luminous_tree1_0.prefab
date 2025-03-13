@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2296176733360640695}
   - component: {fileID: 7604703063352784721}
   - component: {fileID: 8907020368445971963}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Luminous_tree1_0
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -250.47, y: -110.14, z: -0.33064058}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

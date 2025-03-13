@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3931234467607596656}
   - component: {fileID: 5067064500882898909}
   - component: {fileID: 3853437210653556878}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ent_man_0
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.105277, y: 0.8402896, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

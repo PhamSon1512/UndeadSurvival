@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8159926950086684629}
   - component: {fileID: 1344111494693556400}
   - component: {fileID: 6846749003226194029}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chanterelles2_0
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
