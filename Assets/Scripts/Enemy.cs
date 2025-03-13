@@ -81,8 +81,11 @@ public class Enemy : MonoBehaviour
 
         Bullet bullet = collision.GetComponent<Bullet>();
         health -= bullet.damage;
-        StartCoroutine(Knokback());
-
+        
+        if (isBoss != true)
+        {
+            StartCoroutine(Knokback());
+        }
         if (health <= 0)
         {
             // Die

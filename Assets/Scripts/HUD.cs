@@ -54,7 +54,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 if (mySlider != null)
                 {
                     mySlider.value = curExp / maxExp;
-                    Spawn.Instance.Increasenumberofenemy();
+                    
                 }
                 break;
             case InfoType.Level:

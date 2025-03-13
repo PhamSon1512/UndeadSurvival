@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: Gun
   itemDesc: "T\u0103ng {0}% damage\nKh\u1EA3 n\u0103ng xuy\xEAn th\u1EA5u {1}"
   itemIcon: {fileID: -205726582, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-  baseDamage: 4
+  baseDamage: 2
   baseCount: 0
   damages:
   - 0.2
